@@ -32,4 +32,4 @@ Toutes les tâches sont sauvegardées automatiquement dans un fichier local pour
 **Auteur :** louisspjl
 
 > Si tu reforkes ce projet ou que tu l’utilises, merci de me mentionner, ça fait toujours plaisir ! .
-> Si tu reforkes, je serais curieux de voir ce que tu as fait. N’hésite pas à m’envoyer un message sur Discord : louisspjl.
+> Dailleur, je serais curieux de voir ce que tu as fait. N’hésite pas à m’envoyer un message sur Discord : louisspjl.
