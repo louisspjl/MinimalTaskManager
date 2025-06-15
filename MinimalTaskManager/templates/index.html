@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire de Tâches Minimaliste</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h1>MinimalTaskManager</h1>
+                </div>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">{{ tasks|length }}</span>
+                        <span class="stat-label">Total</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ tasks|selectattr('done')|list|length }}</span>
+                        <span class="stat-label">Terminées</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="add-task-section">
+            <form method="POST" action="{{ url_for('index') }}" class="task-form">
+                <div class="input-wrapper">
+                    <i class="fas fa-plus input-icon"></i>
+                    <input type="text" name="task" placeholder="Que voulez-vous accomplir aujourd'hui ?" autocomplete="off" required />
+                </div>
+                <button type="submit" class="add-button">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+
+        <div class="tasks-section">
+            <ul class="task-list">
+                {% for task in tasks %}
+                    <li class="task-item {{ 'completed' if task.done else '' }}">
+                        <div class="task-content">
+                            <div class="task-checkbox">
+                                <a href="{{ url_for('toggle', task_id=loop.index0) }}" class="toggle-btn">
+                                    <i class="fas {{ 'fa-check-circle' if task.done else 'fa-circle' }}"></i>
+                                </a>
+                            </div>
+                            <span class="task-text">{{ task.title }}</span>
+                        </div>
+                        <div class="task-actions">
+                            <a href="{{ url_for('delete', task_id=loop.index0) }}" class="delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <h3>Aucune tâche pour le moment</h3>
+                        <p>Commencez par ajouter votre première tâche ci-dessus</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <p>© 2025 MinimalTaskManager - Développé par <a href="https://github.com/Louisspjl" target="_blank">Louisspjl</a></p>
+                <div class="license-info">
+                    <i class="fab fa-github"></i>
+                    <span>Sous licence MIT</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="background-decoration">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+    </div>
+</body>
+</html>
+
